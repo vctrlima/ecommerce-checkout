@@ -8,9 +8,10 @@ import { MatInputModule } from '@angular/material/input'
 import { SharedModule } from '../shared/shared.module'
 import { CheckoutRoutingModule } from './checkout.routes'
 import { IdentificationComponent } from './components/identification/identification.component'
+import { PaymentComponent } from './components/payment/payment.component'
 
 @NgModule({
-    declarations: [IdentificationComponent],
+    declarations: [IdentificationComponent, PaymentComponent],
     imports: [
         CommonModule,
         CheckoutRoutingModule,
@@ -23,5 +24,6 @@ import { IdentificationComponent } from './components/identification/identificat
         MatIconModule,
         MatInputModule,
     ],
+    providers: [],
 })
 export class CheckoutModule {}

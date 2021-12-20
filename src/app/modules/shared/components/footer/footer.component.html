@@ -1,0 +1,19 @@
+<footer>
+    <button
+        type="button"
+        mat-raised-button
+        [disabled]="isOnStep(0)"
+        (click)="navigateToPreviousStep()"
+    >
+        Anterior
+    </button>
+
+    <button
+        type="button"
+        mat-raised-button
+        (click)="navigateToNextStep()"
+        color="primary"
+    >
+        Próximo
+    </button>
+</footer>

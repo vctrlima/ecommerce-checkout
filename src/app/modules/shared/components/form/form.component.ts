@@ -11,10 +11,7 @@ export class FormComponent implements OnInit {
     @Input() public formGroup!: FormGroup
     @Input() public stepLabel!: string
 
-    @Input() public prevButtonCallback!: Function
-    @Input() public nextButtonCallback!: Function
-
     constructor() {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {}
 }

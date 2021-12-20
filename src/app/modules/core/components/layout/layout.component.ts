@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import { TypeStep } from 'src/app/modules/shared/enums/type-step'
+import { NavigationService } from '../../services/navigation.service'
 
 @Component({
     selector: 'app-layout',
@@ -7,7 +9,21 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core'
     encapsulation: ViewEncapsulation.None,
 })
 export class LayoutComponent implements OnInit {
-    constructor() {}
+    public actualStep!: TypeStep
 
-    ngOnInit(): void {}
+    constructor(private _navigationService: NavigationService) {}
+
+    public ngOnInit(): void {
+        this.initServiceSubscriptions()
+    }
+
+    private initServiceSubscriptions(): void {
+        this._navigationService.getActualStep().subscribe((step) => {
+            this.actualStep = step
+        })
+
+        this._navigationService.getUnlockedStep().subscribe((step) => {
+            this.actualStep = step
+        })
+    }
 }

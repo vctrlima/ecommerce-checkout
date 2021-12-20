@@ -1,10 +1,15 @@
 <app-form [stepLabel]="'Identificação'" [formGroup]="identificationForm">
     <ul>
         <li>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Nome</mat-label>
 
-                <input matInput type="text" formControlName="name" />
+                <input
+                    matInput
+                    type="text"
+                    formControlName="name"
+                    (blur)="validateFormGroup()"
+                />
 
                 <button
                     *ngIf="hasValue(identificationForm.value.name)"
@@ -19,10 +24,15 @@
         </li>
 
         <li>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>E-mail</mat-label>
 
-                <input matInput type="email" formControlName="email" />
+                <input
+                    matInput
+                    type="email"
+                    formControlName="email"
+                    (blur)="validateFormGroup()"
+                />
 
                 <button
                     *ngIf="hasValue(identificationForm.value.email)"
@@ -37,10 +47,15 @@
         </li>
 
         <li>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Telefone para contato</mat-label>
 
-                <input matInput type="text" formControlName="contactNumber" />
+                <input
+                    matInput
+                    type="text"
+                    formControlName="contactNumber"
+                    (blur)="validateFormGroup()"
+                />
 
                 <button
                     *ngIf="hasValue(identificationForm.value.contactNumber)"
@@ -55,10 +70,15 @@
         </li>
 
         <li>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Endereço</mat-label>
 
-                <input matInput type="text" formControlName="address" />
+                <input
+                    matInput
+                    type="text"
+                    formControlName="address"
+                    (blur)="validateFormGroup()"
+                />
 
                 <button
                     *ngIf="hasValue(identificationForm.value.address)"
@@ -73,10 +93,15 @@
         </li>
 
         <li>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Número</mat-label>
 
-                <input matInput type="text" formControlName="addressNumber" />
+                <input
+                    matInput
+                    type="text"
+                    formControlName="addressNumber"
+                    (blur)="validateFormGroup()"
+                />
 
                 <button
                     *ngIf="hasValue(identificationForm.value.addressNumber)"
@@ -91,3 +116,9 @@
         </li>
     </ul>
 </app-form>
+
+<app-footer
+    [actualStep]="actualStep"
+    [nextRoute]="'/checkout/payment'"
+    [validateFormObservable]="validateFormSubject.asObservable()"
+></app-footer>

@@ -4,7 +4,12 @@ import { LayoutComponent } from './modules/core/components/layout/layout.compone
 
 const routes: Routes = [
     {
-        path: '**',
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/checkout/identification',
+    },
+    {
+        path: 'checkout',
         pathMatch: 'full',
         redirectTo: '/checkout/identification',
     },

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Subject } from 'rxjs'
+import { NavigationService } from 'src/app/modules/core/services/navigation.service'
+import { TypeStep } from 'src/app/modules/shared/enums/type-step'
 
 @Component({
     selector: 'app-identification',
@@ -7,6 +10,11 @@ import { FormControl, FormGroup } from '@angular/forms'
     styleUrls: ['./identification.component.scss'],
 })
 export class IdentificationComponent implements OnInit {
+    public validateFormSubject: Subject<void>
+
+    public actualStep!: TypeStep
+    public unlockedStep!: TypeStep
+
     private get name() {
         return this.identificationForm.get('name')
     }
@@ -29,17 +37,29 @@ export class IdentificationComponent implements OnInit {
 
     public identificationForm: FormGroup
 
-    constructor() {
+    constructor(private _navigationService: NavigationService) {
         this.identificationForm = new FormGroup({
-            name: new FormControl(''),
-            email: new FormControl(''),
-            contactNumber: new FormControl(''),
-            address: new FormControl(''),
-            addressNumber: new FormControl(''),
+            name: new FormControl('', [Validators.required]),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            contactNumber: new FormControl('', [Validators.required]),
+            address: new FormControl('', [Validators.required]),
+            addressNumber: new FormControl('', [Validators.required]),
         })
+
+        this.validateFormSubject = new Subject<void>()
     }
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        this._navigationService.setActualStep(TypeStep.Identification)
+
+        this.initServiceSubscriptions()
+    }
+
+    private initServiceSubscriptions(): void {
+        this._navigationService.getUnlockedStep().subscribe((step) => {
+            this.unlockedStep = step
+        })
+    }
 
     public hasValue(value: string): boolean {
         return value != ''
@@ -70,5 +90,13 @@ export class IdentificationComponent implements OnInit {
             default:
                 break
         }
+    }
+
+    public validateFormGroup(): void {
+        if (this.identificationForm.valid) this.emitValidationToFooter()
+    }
+
+    private emitValidationToFooter() {
+        this.validateFormSubject.next()
     }
 }

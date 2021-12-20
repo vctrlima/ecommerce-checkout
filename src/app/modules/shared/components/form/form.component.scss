@@ -1,17 +1,14 @@
 app-form {
+    > h2 {
+        color: #ffffff;
+    }
+
     > form {
         background: #424242;
         padding: 1rem;
         margin-bottom: 1.5rem;
 
-        > h2 {
-            color: #ffffff;
-        }
-    }
-
-    footer {
-        display: flex;
-        justify-content: end;
-        gap: 1rem;
+        border-bottom: 1px solid #e91e63;
+        border-radius: 0.25rem 0.25rem 0 0;
     }
 }

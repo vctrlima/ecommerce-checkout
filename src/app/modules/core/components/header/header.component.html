@@ -1,18 +1,18 @@
 <header>
     <div class="steps">
-        <div [ngClass]="{ active: actualStep == 1 }">
+        <div [ngClass]="{ active: isOnStep(0) }">
             <span>1</span>
         </div>
 
         <div class="divider"></div>
 
-        <div [ngClass]="{ active: actualStep == 2 }">
+        <div [ngClass]="{ active: isOnStep(1) }">
             <span>2</span>
         </div>
 
         <div class="divider"></div>
 
-        <div [ngClass]="{ active: actualStep == 3 }">
+        <div [ngClass]="{ active: isOnStep(2) }">
             <span>3</span>
         </div>
     </div>

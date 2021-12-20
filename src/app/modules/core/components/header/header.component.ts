@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import { TypeStep } from 'src/app/modules/shared/enums/type-step'
+import { NavigationService } from '../../services/navigation.service'
 
 @Component({
     selector: 'app-header',
@@ -7,9 +9,26 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
     encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
-    public actualStep: number = 1
+    public actualStep!: TypeStep
+    public unlockedStep!: TypeStep
 
-    constructor() {}
+    constructor(private _navigationService: NavigationService) {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.initServiceSubscriptions()
+    }
+
+    private initServiceSubscriptions(): void {
+        this._navigationService.getActualStep().subscribe((step) => {
+            this.actualStep = step
+        })
+
+        this._navigationService.getUnlockedStep().subscribe((step) => {
+            this.unlockedStep = step
+        })
+    }
+
+    public isOnStep(step: TypeStep): boolean {
+        return this.actualStep == step
+    }
 }
