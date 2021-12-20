@@ -1,7 +1,22 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { LayoutComponent } from './modules/core/components/layout/layout.component'
 
-const routes: Routes = []
+const routes: Routes = [
+    {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/checkout',
+    },
+    {
+        path: 'checkout',
+        loadChildren: () =>
+            import('./modules/checkout/checkout.module').then(
+                (m) => m.CheckoutModule
+            ),
+        component: LayoutComponent,
+    },
+]
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
