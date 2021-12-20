@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         path: '**',
         pathMatch: 'full',
-        redirectTo: '/checkout',
+        redirectTo: '/checkout/identification',
     },
     {
         path: 'checkout',

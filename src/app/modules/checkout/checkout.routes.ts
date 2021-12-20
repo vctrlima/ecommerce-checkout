@@ -4,7 +4,7 @@ import { IdentificationComponent } from './components/identification/identificat
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'identification',
         component: IdentificationComponent,
     },
 ]

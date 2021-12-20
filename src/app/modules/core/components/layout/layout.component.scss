@@ -1,6 +1,13 @@
 app-layout {
     > section {
+        width: 100%;
+        max-width: 39.5rem;
         min-height: 100vh;
-        background-color: #303030;
+        margin: 0 auto;
+        padding: 1.5rem 0.75rem;
+
+        main {
+            margin-top: 1.5rem;
+        }
     }
 }

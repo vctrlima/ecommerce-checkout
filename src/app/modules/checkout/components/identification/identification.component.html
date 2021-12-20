@@ -1,1 +1,93 @@
-<p>identification works!</p>
+<app-form [stepLabel]="'Identificação'" [formGroup]="identificationForm">
+    <ul>
+        <li>
+            <mat-form-field>
+                <mat-label>Nome</mat-label>
+
+                <input matInput type="text" formControlName="name" />
+
+                <button
+                    *ngIf="hasValue(identificationForm.value.name)"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clearValue('name')"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field>
+                <mat-label>E-mail</mat-label>
+
+                <input matInput type="email" formControlName="email" />
+
+                <button
+                    *ngIf="hasValue(identificationForm.value.email)"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clearValue('email')"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field>
+                <mat-label>Telefone para contato</mat-label>
+
+                <input matInput type="text" formControlName="contactNumber" />
+
+                <button
+                    *ngIf="hasValue(identificationForm.value.contactNumber)"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clearValue('contactNumber')"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field>
+                <mat-label>Endereço</mat-label>
+
+                <input matInput type="text" formControlName="address" />
+
+                <button
+                    *ngIf="hasValue(identificationForm.value.address)"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clearValue('address')"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field>
+                <mat-label>Número</mat-label>
+
+                <input matInput type="text" formControlName="addressNumber" />
+
+                <button
+                    *ngIf="hasValue(identificationForm.value.addressNumber)"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clearValue('addressNumber')"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </li>
+    </ul>
+</app-form>

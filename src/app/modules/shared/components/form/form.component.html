@@ -1,0 +1,27 @@
+<form>
+    <h2>
+        {{ stepLabel }}
+    </h2>
+
+    <ng-content></ng-content>
+</form>
+
+<footer>
+    <button
+        type="button"
+        mat-raised-button
+        (click)="(prevButtonCallback)"
+        disabled
+    >
+        Anterior
+    </button>
+
+    <button
+        type="button"
+        mat-raised-button
+        (click)="(nextButtonCallback)"
+        color="primary"
+    >
+        Próximo
+    </button>
+</footer>

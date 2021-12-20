@@ -1,0 +1,23 @@
+* {
+    font-size: 1rem;
+    box-sizing: border-box;
+
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    background-color: #303030;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}

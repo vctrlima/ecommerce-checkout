@@ -1,0 +1,42 @@
+app-header {
+    header {
+        margin-bottom: 2rem;
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1.5rem;
+
+            > div:not(.divider) {
+                width: 2rem;
+                height: 2rem;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                border-radius: 999px;
+                background-color: #c7c7c7;
+
+                span {
+                    color: #ffffff;
+                }
+
+                &.active {
+                    background-color: #e91e63;
+                }
+            }
+
+            .divider {
+                border-top: 1px solid #454545;
+                flex: auto;
+            }
+        }
+
+        h3.stepLabel {
+            text-align: center;
+        }
+    }
+}
