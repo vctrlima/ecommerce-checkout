@@ -22,10 +22,6 @@ export class HeaderComponent implements OnInit {
         this._navigationService.getActualStep().subscribe((step) => {
             this.actualStep = step
         })
-
-        this._navigationService.getUnlockedStep().subscribe((step) => {
-            this.unlockedStep = step
-        })
     }
 
     public isOnStep(step: TypeStep): boolean {

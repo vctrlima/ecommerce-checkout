@@ -1,0 +1,40 @@
+<app-form [stepLabel]="'Confirmação'">
+    <ul>
+        <li>
+            <mat-form-field appearance="fill">
+                <mat-label>Nome</mat-label>
+
+                <input matInput type="text" />
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field appearance="fill">
+                <mat-label>E-mail</mat-label>
+
+                <input matInput type="email" />
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field appearance="fill">
+                <mat-label>Senha</mat-label>
+
+                <input matInput type="password" />
+            </mat-form-field>
+        </li>
+
+        <li>
+            <mat-form-field appearance="fill">
+                <mat-label>Endereço</mat-label>
+
+                <input matInput type="address" />
+            </mat-form-field>
+        </li>
+    </ul>
+</app-form>
+
+<app-footer
+    [actualStep]="actualStep"
+    [previousRoute]="'/checkout/payment'"
+></app-footer>

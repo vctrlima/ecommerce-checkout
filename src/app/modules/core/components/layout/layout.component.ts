@@ -21,9 +21,5 @@ export class LayoutComponent implements OnInit {
         this._navigationService.getActualStep().subscribe((step) => {
             this.actualStep = step
         })
-
-        this._navigationService.getUnlockedStep().subscribe((step) => {
-            this.actualStep = step
-        })
     }
 }

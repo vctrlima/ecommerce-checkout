@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { AppConstants } from '../../shared/constants/app-constants'
 import { TypeStep } from '../../shared/enums/type-step'
+import { LocalStorageService } from './local-storage.service'
 
 @Injectable({
     providedIn: 'root',
 })
 export class NavigationService {
     private _actualStep: BehaviorSubject<TypeStep>
-    private _unlockedStep: BehaviorSubject<TypeStep>
+    private _storageSteps: TypeStep[]
 
-    constructor() {
+    constructor(private _localStorageService: LocalStorageService) {
         this._actualStep = new BehaviorSubject<TypeStep>(
             TypeStep.Identification
         )
-        this._unlockedStep = new BehaviorSubject<TypeStep>(
-            TypeStep.Identification
+
+        this._storageSteps = new Array<TypeStep>()
+        this._storageSteps.push(TypeStep.Identification)
+
+        this._localStorageService.set(
+            AppConstants.StorageKeys.StepsPermission.Name,
+            this._storageSteps
         )
     }
 
@@ -26,11 +33,22 @@ export class NavigationService {
         this._actualStep.next(step)
     }
 
-    public getUnlockedStep(): Observable<TypeStep> {
-        return this._unlockedStep.asObservable()
+    public setStorageStep(step: TypeStep): void {
+        if (!this._storageSteps.includes(step)) {
+            this._storageSteps.push(step)
+
+            this._localStorageService.set(
+                AppConstants.StorageKeys.StepsPermission.Name,
+                this._storageSteps
+            )
+        }
     }
 
-    public setUnlockedStep(step: TypeStep): void {
-        this._unlockedStep.next(step)
+    public getStorageSteps(): TypeStep[] {
+        const steps: TypeStep[] = this._localStorageService.get(
+            AppConstants.StorageKeys.StepsPermission.Name
+        )
+
+        return steps
     }
 }

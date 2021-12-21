@@ -1,4 +1,7 @@
-<app-form [stepLabel]="'Identificação'" [formGroup]="identificationForm">
+<app-form
+    [stepLabel]="'Identificação'"
+    [formGroup]="_formCache._identification"
+>
     <ul>
         <li>
             <mat-form-field appearance="fill">
@@ -12,7 +15,7 @@
                 />
 
                 <button
-                    *ngIf="hasValue(identificationForm.value.name)"
+                    *ngIf="hasValue(_formCache._identification.value.name)"
                     matSuffix
                     mat-icon-button
                     aria-label="Clear"
@@ -35,7 +38,7 @@
                 />
 
                 <button
-                    *ngIf="hasValue(identificationForm.value.email)"
+                    *ngIf="hasValue(_formCache._identification.value.email)"
                     matSuffix
                     mat-icon-button
                     aria-label="Clear"
@@ -48,21 +51,21 @@
 
         <li>
             <mat-form-field appearance="fill">
-                <mat-label>Telefone para contato</mat-label>
+                <mat-label>Senha</mat-label>
 
                 <input
                     matInput
-                    type="text"
-                    formControlName="contactNumber"
+                    type="password"
+                    formControlName="password"
                     (blur)="validateFormGroup()"
                 />
 
                 <button
-                    *ngIf="hasValue(identificationForm.value.contactNumber)"
+                    *ngIf="hasValue(_formCache._identification.value.password)"
                     matSuffix
                     mat-icon-button
                     aria-label="Clear"
-                    (click)="clearValue('contactNumber')"
+                    (click)="clearValue('password')"
                 >
                     <mat-icon>close</mat-icon>
                 </button>
@@ -75,40 +78,17 @@
 
                 <input
                     matInput
-                    type="text"
+                    type="address"
                     formControlName="address"
                     (blur)="validateFormGroup()"
                 />
 
                 <button
-                    *ngIf="hasValue(identificationForm.value.address)"
+                    *ngIf="hasValue(_formCache._identification.value.address)"
                     matSuffix
                     mat-icon-button
                     aria-label="Clear"
                     (click)="clearValue('address')"
-                >
-                    <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
-        </li>
-
-        <li>
-            <mat-form-field appearance="fill">
-                <mat-label>Número</mat-label>
-
-                <input
-                    matInput
-                    type="text"
-                    formControlName="addressNumber"
-                    (blur)="validateFormGroup()"
-                />
-
-                <button
-                    *ngIf="hasValue(identificationForm.value.addressNumber)"
-                    matSuffix
-                    mat-icon-button
-                    aria-label="Clear"
-                    (click)="clearValue('addressNumber')"
                 >
                     <mat-icon>close</mat-icon>
                 </button>
@@ -119,6 +99,6 @@
 
 <app-footer
     [actualStep]="actualStep"
+    [canContinue]="canContinue"
     [nextRoute]="'/checkout/payment'"
-    [validateFormObservable]="validateFormSubject.asObservable()"
 ></app-footer>

@@ -2,7 +2,7 @@
     <button
         type="button"
         mat-raised-button
-        [disabled]="isOnStep(0)"
+        [disabled]="!previousRoute"
         (click)="navigateToPreviousStep()"
     >
         Anterior
@@ -11,6 +11,7 @@
     <button
         type="button"
         mat-raised-button
+        [disabled]="!nextRoute || !canContinue"
         (click)="navigateToNextStep()"
         color="primary"
     >

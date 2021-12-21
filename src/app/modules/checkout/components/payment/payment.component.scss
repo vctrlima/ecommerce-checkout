@@ -1,0 +1,46 @@
+app-payment {
+    ul {
+        > li {
+            margin-bottom: 2rem;
+
+            &:first-child {
+                h3 {
+                    display: flex;
+                    justify-content: space-between;
+                    color: #c9c9cc;
+
+                    strong {
+                        font-weight: 400;
+                        color: #ffffff;
+                    }
+                }
+            }
+
+            &.terms {
+                max-height: 10rem;
+                overflow: auto;
+
+                padding: 1rem;
+                background-color: #555555;
+
+                border-radius: 0.25rem 0.25rem 0 0;
+                border-bottom: 1px solid #c9c9cc;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                p {
+                    color: #c9c9cc;
+                }
+            }
+
+            &.agreeWithTerms {
+                display: flex;
+                justify-content: flex-end;
+
+                color: #ffffff;
+            }
+        }
+    }
+}

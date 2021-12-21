@@ -5,6 +5,7 @@ import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app.routes'
 import { CheckoutModule } from './modules/checkout/checkout.module'
 import { CoreModule } from './modules/core/core.module'
+import { FormCacheService } from './modules/core/services/form-cache.service'
 import { NavigationService } from './modules/core/services/navigation.service'
 
 @NgModule({
@@ -16,7 +17,7 @@ import { NavigationService } from './modules/core/services/navigation.service'
         CoreModule,
         CheckoutModule,
     ],
-    providers: [NavigationService],
+    providers: [NavigationService, FormCacheService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

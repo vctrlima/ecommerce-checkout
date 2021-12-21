@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Subject } from 'rxjs'
+import { FormCacheService } from 'src/app/modules/core/services/form-cache.service'
+import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service'
 import { NavigationService } from 'src/app/modules/core/services/navigation.service'
 import { TypeStep } from 'src/app/modules/shared/enums/type-step'
 
@@ -10,55 +11,46 @@ import { TypeStep } from 'src/app/modules/shared/enums/type-step'
     styleUrls: ['./identification.component.scss'],
 })
 export class IdentificationComponent implements OnInit {
-    public validateFormSubject: Subject<void>
+    public validateFormSubject: Subject<boolean>
 
     public actualStep!: TypeStep
     public unlockedStep!: TypeStep
+    public canContinue: boolean
 
     private get name() {
-        return this.identificationForm.get('name')
+        return this._formCache._identification.get('name')
     }
 
     private get email() {
-        return this.identificationForm.get('email')
+        return this._formCache._identification.get('email')
     }
 
-    private get contactNumber() {
-        return this.identificationForm.get('contactNumber')
+    private get password() {
+        return this._formCache._identification.get('password')
     }
 
     private get address() {
-        return this.identificationForm.get('address')
+        return this._formCache._identification.get('address')
     }
 
-    private get addressNumber() {
-        return this.identificationForm.get('addressNumber')
-    }
+    constructor(
+        public _formCache: FormCacheService,
+        private _localStorageService: LocalStorageService,
+        private _navigationService: NavigationService
+    ) {
+        this.validateFormSubject = new Subject<boolean>()
 
-    public identificationForm: FormGroup
-
-    constructor(private _navigationService: NavigationService) {
-        this.identificationForm = new FormGroup({
-            name: new FormControl('', [Validators.required]),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            contactNumber: new FormControl('', [Validators.required]),
-            address: new FormControl('', [Validators.required]),
-            addressNumber: new FormControl('', [Validators.required]),
-        })
-
-        this.validateFormSubject = new Subject<void>()
+        this.canContinue = false
     }
 
     public ngOnInit(): void {
-        this._navigationService.setActualStep(TypeStep.Identification)
-
-        this.initServiceSubscriptions()
+        this.setActualStep()
+        this.validateFormGroup()
     }
 
-    private initServiceSubscriptions(): void {
-        this._navigationService.getUnlockedStep().subscribe((step) => {
-            this.unlockedStep = step
-        })
+    private setActualStep(): void {
+        this._navigationService.setActualStep(TypeStep.Identification)
+        this._navigationService.setStorageStep(TypeStep.Identification)
     }
 
     public hasValue(value: string): boolean {
@@ -75,16 +67,12 @@ export class IdentificationComponent implements OnInit {
                 this.email?.reset('')
                 break
 
-            case 'contactNumber':
-                this.contactNumber?.reset('')
+            case 'password':
+                this.password?.reset('')
                 break
 
             case 'address':
                 this.address?.reset('')
-                break
-
-            case 'addressNumber':
-                this.addressNumber?.reset('')
                 break
 
             default:
@@ -93,10 +81,6 @@ export class IdentificationComponent implements OnInit {
     }
 
     public validateFormGroup(): void {
-        if (this.identificationForm.valid) this.emitValidationToFooter()
-    }
-
-    private emitValidationToFooter() {
-        this.validateFormSubject.next()
+        if (this._formCache._identification.valid) this.canContinue = true
     }
 }

@@ -1,6 +1,65 @@
-<app-form [stepLabel]="'Forma de pagamento'"> </app-form>
+<app-form [stepLabel]="'Pagamento'" [formGroup]="_formCache._payment">
+    <ul>
+        <li>
+            <h3>
+                Valor total:
+                <strong>R$ 139,90</strong>
+            </h3>
+        </li>
+
+        <li>
+            <mat-form-field appearance="fill">
+                <mat-label>Método de pagamento</mat-label>
+
+                <mat-select
+                    formControlName="method"
+                    (selectionChange)="validateFormGroup()"
+                    required
+                >
+                    <ng-container *ngFor="let paymentMethod of paymentMethods">
+                        <mat-option [value]="paymentMethod.value">
+                            {{ paymentMethod.label }}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+
+                <mat-error> Por favor, selecione uma opção </mat-error>
+            </mat-form-field>
+        </li>
+
+        <li class="terms">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                vel feugiat diam. Suspendisse tincidunt metus nec velit
+                volutpat, vitae semper tellus consequat. Fusce odio massa,
+                vestibulum hendrerit ornare et, molestie vel dui. Pellentesque
+                sed neque sit amet dui feugiat cursus. Nulla nec justo eget nisi
+                molestie iaculis in eu lacus. Mauris mi velit, laoreet et elit
+                a, semper facilisis velit. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Sed viverra ultrices nunc, in
+                rutrum nulla maximus et. Nulla nec posuere libero. Aliquam eget
+                posuere tortor. Quisque a enim sapien. Sed lacinia convallis
+                ipsum, eu auctor orci placerat sit amet. Nulla sollicitudin ante
+                velit. Nunc placerat velit a tincidunt placerat. Donec posuere
+                hendrerit tellus ut mattis.
+            </p>
+        </li>
+
+        <li class="agreeWithTerms">
+            <mat-checkbox
+                formControlName="agreeWithTerms"
+                [color]="'primary'"
+                (change)="validateFormGroup()"
+            >
+                Concordo com os termos *
+            </mat-checkbox>
+        </li>
+    </ul>
+</app-form>
 
 <app-footer
     [actualStep]="actualStep"
+    [canContinue]="canContinue"
+    [nextRoute]="'/checkout/confirmation'"
     [previousRoute]="'/checkout/identification'"
 ></app-footer>

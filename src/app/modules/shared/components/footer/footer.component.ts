@@ -1,12 +1,7 @@
-import {
-    Component,
-    Input,
-    OnDestroy,
-    OnInit,
-    ViewEncapsulation,
-} from '@angular/core'
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
-import { Observable, Subscription } from 'rxjs'
+import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service'
 import { TypeStep } from 'src/app/modules/shared/enums/type-step'
 
 @Component({
@@ -16,39 +11,34 @@ import { TypeStep } from 'src/app/modules/shared/enums/type-step'
     encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent implements OnInit {
-    @Input() public validateFormObservable!: Observable<void>
     @Input() public actualStep!: TypeStep
+    @Input() public canContinue!: boolean
     @Input() public previousRoute!: string
     @Input() public nextRoute!: string
 
-    private canContinue: boolean
+    constructor(
+        private _localStorageService: LocalStorageService,
+        private _router: Router,
+        private _snackBar: MatSnackBar
+    ) {}
 
-    constructor(private _router: Router) {
-        this.canContinue = false
-    }
-
-    public ngOnInit(): void {
-        this.initValidateFormSubscription()
-    }
-
-    private initValidateFormSubscription(): void {
-        this.validateFormObservable.subscribe(() => {
-            this.canContinue = true
-        })
-    }
-
-    public isOnStep(step: TypeStep): boolean {
-        return this.actualStep == step
-    }
+    public ngOnInit(): void {}
 
     public navigateToPreviousStep(): void {
         if (this.previousRoute) this._router.navigate([this.previousRoute])
-        else console.log('Error dialog')
     }
 
     public navigateToNextStep(): void {
-        if (this.nextRoute && this.canContinue)
+        if (this.nextRoute) {
+            this._localStorageService.set
+
             this._router.navigate([this.nextRoute])
-        else console.log('Error dialog')
+        } else {
+            this.openErrorSnackbar()
+        }
+    }
+
+    private openErrorSnackbar(): void {
+        this._snackBar.open('* Preenchimento obrigatório', 'OK')
     }
 }
