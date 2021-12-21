@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core'
+import { MatDialogModule } from '@angular/material/dialog'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AppComponent } from './app.component'
@@ -16,6 +17,8 @@ import { NavigationService } from './modules/core/services/navigation.service'
         BrowserAnimationsModule,
         CoreModule,
         CheckoutModule,
+
+        MatDialogModule,
     ],
     providers: [NavigationService, FormCacheService],
     bootstrap: [AppComponent],
