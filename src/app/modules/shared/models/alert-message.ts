@@ -1,3 +1,3 @@
-export class AlertMessage {
-    public message!: string
+export interface AlertMessage {
+    message: string
 }
