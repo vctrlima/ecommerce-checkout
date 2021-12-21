@@ -8,6 +8,8 @@ import { CheckoutModule } from './modules/checkout/checkout.module'
 import { CoreModule } from './modules/core/core.module'
 import { FormCacheService } from './modules/core/services/form-cache.service'
 import { NavigationService } from './modules/core/services/navigation.service'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
     declarations: [AppComponent],
@@ -15,10 +17,12 @@ import { NavigationService } from './modules/core/services/navigation.service'
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        FormsModule,
         CoreModule,
         CheckoutModule,
 
         MatDialogModule,
+        MatSlideToggleModule,
     ],
     providers: [NavigationService, FormCacheService],
     bootstrap: [AppComponent],

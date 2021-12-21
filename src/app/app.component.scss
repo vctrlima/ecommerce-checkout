@@ -1,0 +1,10 @@
+.theme-toggler {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    color: #ffffff;
+
+    &.light {
+        color: #5e5e5e;
+    }
+}

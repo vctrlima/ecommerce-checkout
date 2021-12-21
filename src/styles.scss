@@ -1,3 +1,5 @@
 @use './styles/base.scss';
+@use './styles/theme.scss';
 
+@use './styles/material/mat-dialog.scss';
 @use './styles/material/mat-form-field.scss';

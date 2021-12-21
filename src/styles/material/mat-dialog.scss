@@ -1,0 +1,27 @@
+app-root {
+    &.theme-light {
+        .mat-dialog-container {
+            background-color: #f2f2f2;
+        }
+    }
+
+    &.theme-dark {
+        .mat-dialog-container {
+            background-color: #424242;
+        }
+    }
+}
+
+body {
+    &.theme-light {
+        .cdk-overlay-dark-backdrop {
+            background-color: #c7c7c7;
+        }
+    }
+
+    &.theme-dark {
+        .cdk-overlay-dark-backdrop {
+            background-color: #303030;
+        }
+    }
+}

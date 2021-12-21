@@ -26,7 +26,7 @@ app-header {
                 }
 
                 &.active {
-                    background-color: #e91e63;
+                    background-color: #3f51b5;
                 }
             }
 
@@ -38,6 +38,26 @@ app-header {
 
         h3.stepLabel {
             text-align: center;
+        }
+    }
+}
+
+app-root {
+    &.theme-light {
+        app-header {
+            .divider {
+                border-top-color: #e8e8e8;
+            }
+        }
+    }
+
+    &.theme-dark {
+        app-header {
+            .steps {
+                > div:not(.divider, .active) {
+                    background-color: #424242;
+                }
+            }
         }
     }
 }

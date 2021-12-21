@@ -1,6 +1,18 @@
 mat-form-field {
-    color: #ffffff;
-
     width: 100%;
     max-width: 36rem;
+}
+
+app-root {
+    &.theme-light {
+        mat-form-field {
+            color: #5e5e5e;
+        }
+    }
+
+    &.theme-dark {
+        mat-form-field {
+            color: #ffffff;
+        }
+    }
 }

@@ -1,1 +1,11 @@
 <router-outlet></router-outlet>
+
+<div class="theme-toggler" [ngClass]="{ light: !isDark }">
+    <mat-slide-toggle
+        [(ngModel)]="isDark"
+        (ngModelChange)="setBodyClassTheme()"
+        [color]="'primary'"
+    >
+        Tema escuro
+    </mat-slide-toggle>
+</div>

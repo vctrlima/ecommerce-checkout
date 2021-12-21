@@ -1,13 +1,33 @@
 app-layout {
-    > section {
-        width: 100%;
-        max-width: 39.5rem;
-        min-height: 100vh;
-        margin: 0 auto;
-        padding: 1.5rem 0.75rem;
+    .app-content {
+        > section {
+            width: 100%;
+            max-width: 39.5rem;
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 1.5rem 0.75rem;
 
-        main {
-            margin-top: 1.5rem;
+            main {
+                margin-top: 1.5rem;
+            }
+        }
+    }
+}
+
+app-root {
+    &.theme-light {
+        app-layout {
+            .app-content {
+                background-color: #fafafa;
+            }
+        }
+    }
+
+    &.theme-dark {
+        app-layout {
+            .app-content {
+                background-color: #303030;
+            }
         }
     }
 }
