@@ -1,0 +1,13 @@
+app-root {
+    &.theme-light {
+        mat-checkbox {
+            color: #5e5e5e;
+        }
+    }
+
+    &.theme-dark {
+        mat-checkbox {
+            color: #ffffff;
+        }
+    }
+}

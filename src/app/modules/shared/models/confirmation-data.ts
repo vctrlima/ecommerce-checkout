@@ -1,22 +1,24 @@
-export class ConfirmationData {
-    public name: string
-    public email: string
-    public password: string
-    public address: string
-    public paymentMethod: string
-    public agreeWithTerms: boolean
+import {
+    TypePaymentMethods,
+    TypePaymentMethodsLabel,
+} from '../enums/type-payment-methods'
+import { FormData } from './form-data'
+
+export class ConfirmationData extends FormData {
+    public paymentMethodLabel: string
 
     constructor() {
-        this.name = ''
-        this.email = ''
-        this.password = ''
-        this.address = ''
-        this.paymentMethod = ''
-        this.agreeWithTerms = false
+        super()
+
+        this.paymentMethodLabel = ''
     }
 
-    public deserialize(values: ConfirmationData): ConfirmationData {
-        Object.assign(values)
+    public deserialize(input: FormData): ConfirmationData {
+        Object.assign(this, input)
+
+        this.paymentMethodLabel = TypePaymentMethodsLabel.get(
+            <any>TypePaymentMethods[this.paymentMethod]
+        ) as string
 
         return this
     }

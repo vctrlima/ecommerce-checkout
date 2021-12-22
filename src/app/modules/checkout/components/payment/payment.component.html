@@ -11,11 +11,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Método de pagamento</mat-label>
 
-                <mat-select
-                    formControlName="method"
-                    (selectionChange)="validateFormGroup()"
-                    required
-                >
+                <mat-select formControlName="method" required>
                     <ng-container *ngFor="let paymentMethod of paymentMethods">
                         <mat-option [value]="paymentMethod.value">
                             {{ paymentMethod.label }}
@@ -46,11 +42,7 @@
         </li>
 
         <li class="agreeWithTerms">
-            <mat-checkbox
-                formControlName="agreeWithTerms"
-                [color]="'primary'"
-                (change)="validateFormGroup()"
-            >
+            <mat-checkbox formControlName="agreeWithTerms" [color]="'primary'">
                 Concordo com os termos *
             </mat-checkbox>
         </li>
@@ -59,7 +51,7 @@
 
 <app-footer
     [actualStep]="actualStep"
-    [canContinue]="canContinue"
+    [canContinue]="canContinue && agreeWithTerms"
     [nextRoute]="'/checkout/confirmation'"
     [previousRoute]="'/checkout/identification'"
 ></app-footer>

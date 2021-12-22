@@ -3,15 +3,25 @@ mat-form-field {
     max-width: 36rem;
 }
 
+.theme-light .mat-input-element:disabled {
+}
+
 app-root {
     &.theme-light {
-        mat-form-field {
+        mat-form-field,
+        .mat-input-element:disabled,
+        .mat-form-field-type-mat-native-select.mat-form-field-disabled
+            .mat-form-field-infix::after {
             color: #5e5e5e;
         }
     }
 
     &.theme-dark {
-        mat-form-field {
+        mat-form-field,
+        .theme-dark .mat-input-element:disabled,
+        .theme-dark
+            .mat-form-field-type-mat-native-select.mat-form-field-disabled
+            .mat-form-field-infix::after {
             color: #ffffff;
         }
     }

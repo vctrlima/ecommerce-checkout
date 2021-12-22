@@ -38,8 +38,35 @@ app-payment {
             &.agreeWithTerms {
                 display: flex;
                 justify-content: flex-end;
+            }
+        }
+    }
+}
 
-                color: #ffffff;
+app-root {
+    &.theme-light {
+        app-payment {
+            ul {
+                > li {
+                    &:first-child {
+                        h3 {
+                            color: #5e5e5e;
+
+                            strong {
+                                color: #3f51b5;
+                            }
+                        }
+                    }
+
+                    &.terms {
+                        background-color: #e8e8e8;
+                        border-bottom-color: #5e5e5e;
+
+                        p {
+                            color: #5e5e5e;
+                        }
+                    }
+                }
             }
         }
     }

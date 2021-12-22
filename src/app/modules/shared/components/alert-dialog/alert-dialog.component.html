@@ -1,9 +1,11 @@
-<h2>Atenção!</h2>
+<h2>{{ data.title }}</h2>
 
 <p>
     {{ data.message }}
 </p>
 
 <footer>
-    <button mat-button cdkFocusInitial (click)="close()">Ok</button>
+    <button mat-button cdkFocusInitial (click)="close()">
+        {{ data.buttonLabel }}
+    </button>
 </footer>

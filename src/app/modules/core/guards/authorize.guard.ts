@@ -61,8 +61,10 @@ export class AuthorizeGuard implements CanActivate {
             width: '90%',
             maxWidth: '35rem',
             data: {
+                title: 'Atenção!',
                 message:
                     'Você não possui acesso a essa página. Assim, você será redirecionado para a primeira página do fluxo.',
+                buttonLabel: 'Ok',
             },
         }
         const alertDialogRef: MatDialogRef<AlertDialogComponent> =

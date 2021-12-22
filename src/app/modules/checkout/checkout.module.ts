@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -9,9 +9,9 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { SharedModule } from '../shared/shared.module'
 import { CheckoutRoutingModule } from './checkout.routes'
+import { ConfirmationComponent } from './components/confirmation/confirmation.component'
 import { IdentificationComponent } from './components/identification/identification.component'
 import { PaymentComponent } from './components/payment/payment.component'
-import { ConfirmationComponent } from './components/confirmation/confirmation.component'
 
 @NgModule({
     declarations: [
@@ -24,6 +24,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
         CheckoutRoutingModule,
         SharedModule,
 
+        FormsModule,
         ReactiveFormsModule,
 
         MatButtonModule,

@@ -33,17 +33,6 @@ export class NavigationService {
         this._actualStep.next(step)
     }
 
-    public setStorageStep(step: TypeStep): void {
-        if (!this._storageSteps.includes(step)) {
-            this._storageSteps.push(step)
-
-            this._localStorageService.set(
-                AppConstants.StorageKeys.StepsPermission.Name,
-                this._storageSteps
-            )
-        }
-    }
-
     public getStorageSteps(): TypeStep[] {
         const steps: TypeStep[] = this._localStorageService.get(
             AppConstants.StorageKeys.StepsPermission.Name

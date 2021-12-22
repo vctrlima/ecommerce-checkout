@@ -8,13 +8,26 @@
         Anterior
     </button>
 
-    <button
-        type="button"
-        mat-raised-button
-        [disabled]="!nextRoute || !canContinue"
-        (click)="navigateToNextStep()"
-        color="primary"
-    >
-        Próximo
-    </button>
+    <ng-container *ngIf="isOnConfirmationRoute(); else nextButton">
+        <button
+            type="button"
+            mat-raised-button
+            (click)="showAlertDialog()"
+            color="primary"
+        >
+            Concluir
+        </button>
+    </ng-container>
+
+    <ng-template #nextButton>
+        <button
+            type="button"
+            mat-raised-button
+            [disabled]="!nextRoute || !canContinue"
+            (click)="navigateToNextStep()"
+            color="primary"
+        >
+            Próximo
+        </button>
+    </ng-template>
 </footer>
