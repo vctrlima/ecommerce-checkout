@@ -5,11 +5,18 @@ import {
     OnInit,
     ViewEncapsulation,
 } from '@angular/core'
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
+import {
+    MatDialog,
+    MatDialogConfig,
+    MatDialogRef,
+} from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
 import { FormCacheService } from 'src/app/modules/core/services/form-cache.service'
+import { LocalStorageService } from 'src/app/modules/core/services/local-storage.service'
 import { TypeStep } from 'src/app/modules/shared/enums/type-step'
+import { AppConstants } from '../../constants/app-constants'
+import { ConfirmationData } from '../../models/confirmation-data'
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component'
 
 @Component({
@@ -27,11 +34,26 @@ export class FooterComponent implements OnInit {
     constructor(
         private _dialog: MatDialog,
         private _formCache: FormCacheService,
+        private _localStorageService: LocalStorageService,
         private _router: Router,
         private _snackBar: MatSnackBar
     ) {}
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        if (!isDevMode()) this.setFormCacheData()
+    }
+
+    private setFormCacheData(): void {
+        let data: ConfirmationData = new ConfirmationData()
+
+        data = this._formCache.getConfirmationData()
+
+        this._formCache.name = data.name
+        this._formCache.email = data.email
+        this._formCache.password = data.password
+        this._formCache.address = data.address
+        this._formCache.paymentMethod = data.paymentMethod
+    }
 
     public navigateToPreviousStep(): void {
         if (this.previousRoute) this._router.navigate([this.previousRoute])
@@ -64,7 +86,21 @@ export class FooterComponent implements OnInit {
             },
         }
 
-        this._dialog.open(AlertDialogComponent, alertDialogOptions)
+        const alertDialogRef: MatDialogRef<AlertDialogComponent> =
+            this._dialog.open(AlertDialogComponent, alertDialogOptions)
+
+        alertDialogRef.afterClosed().subscribe(() => {
+            this._localStorageService.remove(
+                AppConstants.StorageKeys.StepsPermission.Name
+            )
+            this._localStorageService.set(
+                AppConstants.StorageKeys.StepsPermission.Name,
+                TypeStep.Identification
+            )
+            this._formCache.resetFormCache()
+
+            this._router.navigate(['/checkout/identification'])
+        })
     }
 
     private getAlertDialogMessage(): string {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { FormGroup } from '@angular/forms'
+import { Router } from '@angular/router'
 import { AppConstants } from '../../shared/constants/app-constants'
 import { TypeStep } from '../../shared/enums/type-step'
 import { LocalStorageService } from './local-storage.service'
@@ -10,7 +11,10 @@ import { LocalStorageService } from './local-storage.service'
 export class FormValidationService {
     private _allowedSteps: TypeStep[] = new Array<TypeStep>()
 
-    constructor(private _localStorageService: LocalStorageService) {
+    constructor(
+        private _localStorageService: LocalStorageService,
+        private _router: Router
+    ) {
         this._allowedSteps = this.getStepsFromStorage()
     }
 
@@ -24,8 +28,26 @@ export class FormValidationService {
                     AppConstants.StorageKeys.StepsPermission.Name,
                     this._allowedSteps
                 )
+            } else {
+                let storageSteps: TypeStep[] = this._localStorageService.get(
+                    AppConstants.StorageKeys.StepsPermission.Name
+                )
+
+                storageSteps.splice(this.getNextStepByRoute(), 1)
+
+                this._localStorageService.set(
+                    AppConstants.StorageKeys.StepsPermission.Name,
+                    storageSteps
+                )
             }
         })
+    }
+
+    private getNextStepByRoute(): TypeStep {
+        if (this._router.url.includes('/identification'))
+            return TypeStep.Payment
+
+        return TypeStep.Confirmation
     }
 
     private getStepsFromStorage(): TypeStep[] {

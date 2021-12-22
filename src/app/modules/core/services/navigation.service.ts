@@ -17,12 +17,21 @@ export class NavigationService {
         )
 
         this._storageSteps = new Array<TypeStep>()
-        this._storageSteps.push(TypeStep.Identification)
+        this.setStorageStepsInitialValue()
 
         this._localStorageService.set(
             AppConstants.StorageKeys.StepsPermission.Name,
             this._storageSteps
         )
+    }
+
+    private setStorageStepsInitialValue(): void {
+        this._storageSteps = this.getStorageSteps()
+
+        if (!this._storageSteps) {
+            this._storageSteps = new Array<TypeStep>()
+            this._storageSteps.push(TypeStep.Identification)
+        }
     }
 
     public getActualStep(): Observable<TypeStep> {

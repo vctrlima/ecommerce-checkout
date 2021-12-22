@@ -17,7 +17,7 @@ export class ConfirmationData extends FormData {
         Object.assign(this, input)
 
         this.paymentMethodLabel = TypePaymentMethodsLabel.get(
-            <any>TypePaymentMethods[this.paymentMethod]
+            <any>TypePaymentMethods[this.paymentMethod as number]
         ) as string
 
         return this

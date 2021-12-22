@@ -13,24 +13,44 @@ export class FormCacheService {
     public _payment: FormGroup
     private _formData: FormData
 
-    private get name() {
+    public get name() {
         return this._identification.get('name')?.value
     }
 
-    private get email() {
+    public get email() {
         return this._identification.get('email')?.value
     }
 
-    private get password() {
+    public get password() {
         return this._identification.get('password')?.value
     }
 
-    private get address() {
+    public get address() {
         return this._identification.get('address')?.value
     }
 
-    private get paymentMethod() {
+    public get paymentMethod() {
         return this._payment.get('method')?.value
+    }
+
+    public set name(value: string) {
+        this._identification.controls['name']?.setValue(value)
+    }
+
+    public set email(value: string) {
+        this._identification.controls['email']?.setValue(value)
+    }
+
+    public set password(value: string) {
+        this._identification.controls['password']?.setValue(value)
+    }
+
+    public set address(value: string) {
+        this._identification.controls['address']?.setValue(value)
+    }
+
+    public set paymentMethod(value: string | number) {
+        this._payment.controls['method']?.setValue(value)
     }
 
     constructor(private _localStorageService: LocalStorageService) {
@@ -89,5 +109,26 @@ export class FormCacheService {
             )
 
         return new ConfirmationData().deserialize(formData)
+    }
+
+    public resetFormCache(): void {
+        this._identification = new FormGroup({
+            name: new FormControl('', [
+                Validators.required,
+                Validators.minLength(5),
+            ]),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            address: new FormControl('', [
+                Validators.required,
+                Validators.minLength(8),
+            ]),
+        })
+
+        this._payment = new FormGroup({
+            method: new FormControl(''),
+            agreeWithTerms: new FormControl(false, Validators.requiredTrue),
+        })
+
+        this._formData = new FormData()
     }
 }
