@@ -37,7 +37,7 @@ export class FooterComponent implements OnInit {
         private _localStorageService: LocalStorageService,
         private _router: Router,
         private _snackBar: MatSnackBar
-    ) {}
+    ) { }
 
     public ngOnInit(): void {
         if (!isDevMode()) this.setFormCacheData()
@@ -90,6 +90,11 @@ export class FooterComponent implements OnInit {
             this._dialog.open(AlertDialogComponent, alertDialogOptions)
 
         alertDialogRef.afterClosed().subscribe(() => {
+            if (!isDevMode())
+                this._localStorageService.remove(
+                    AppConstants.StorageKeys.FormData.Name
+                )
+
             this._localStorageService.remove(
                 AppConstants.StorageKeys.StepsPermission.Name
             )

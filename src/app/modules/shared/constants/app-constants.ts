@@ -11,7 +11,7 @@ export const AppConstants = {
         },
 
         FormData: {
-            Name: 'confirmation_data',
+            Name: 'form_data',
             IsObject: true,
         },
     },

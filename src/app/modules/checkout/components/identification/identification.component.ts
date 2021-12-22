@@ -70,6 +70,9 @@ export class IdentificationComponent implements OnInit {
     }
 
     private initCanContinueSubscription(): void {
+        if (this._formCache._identification.valid)
+            this.canContinue = true
+
         this._formCache._identification.valueChanges.subscribe(() => {
             if (this._formCache._identification.valid) this.canContinue = true
             else this.canContinue = false

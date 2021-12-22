@@ -63,7 +63,7 @@ export class AuthorizeGuard implements CanActivate {
             data: {
                 title: 'Atenção!',
                 message:
-                    'Você não possui acesso a essa página. Assim, você será redirecionado para a primeira página do fluxo.',
+                    'Você não possui acesso a essa página. Por favor, preencha o formulário seguindo o fluxo proposto.',
                 buttonLabel: 'Ok',
             },
         }

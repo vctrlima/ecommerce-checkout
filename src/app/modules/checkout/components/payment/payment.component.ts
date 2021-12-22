@@ -60,6 +60,9 @@ export class PaymentComponent implements OnInit {
     }
 
     private initCanContinueSubscription(): void {
+        if (this._formCache._payment.valid)
+            this.canContinue = true
+
         this._formCache._payment.valueChanges.subscribe(() => {
             if (this._formCache._payment.valid) this.canContinue = true
             else this.canContinue = false
